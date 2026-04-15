@@ -898,54 +898,99 @@
            RESPONSIVE
            ═══════════════════════════════════════ */
         
-       /* Diese Regeln gelten NUR für Bildschirme bis 900px Breite */
-@media (max-width: 900px) {
-    
-    .nav__links {
-        /* Das Menü wird zum Full-Screen Overlay */
-        position: fixed;
-        top: 0;
-        right: -100%; /* Startet unsichtbar rechts außerhalb */
-        width: 100%;
-        height: 100vh;
-        background: rgba(10, 10, 10, 0.98); 
-        backdrop-filter: blur(15px);
-        
-        /* Links untereinander zentrieren */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 3rem;
-        
-        /* Die Animation beim Reinfahren */
-        transition: right 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-        z-index: 99;
-    }
+         @media (max-width: 900px) {
+            
+            /* =========================================
+               1. NAVIGATION (Mobile)
+               ========================================= */
+            .nav {
+                padding: 1rem 1.25rem;
+            }
 
-    /* Wenn das Menü offen ist, schieben wir es auf 'right: 0' */
-    .nav__links.active {
-        right: 0;
-    }
+            .nav__links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(15px);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 3rem;
+                transition: right 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+                z-index: 99;
+            }
 
-    /* Der Hamburger-Button wird sichtbar */
-    .nav__burger {
-        display: flex;
-        position: relative;
-        z-index: 100; /* Muss über dem Overlay liegen */
-    }
+            .nav__links.active {
+                right: 0;
+            }
 
-    /* Animation der Striche zum 'X' */
-    .nav__burger.active span:nth-child(1) {
-        transform: translateY(6.5px) rotate(45deg);
-    }
-    .nav__burger.active span:nth-child(2) {
-        opacity: 0;
-    }
-    .nav__burger.active span:nth-child(3) {
-        transform: translateY(-6.5px) rotate(-45deg);
-    }
-}
+            .nav__burger {
+                display: flex;
+                position: relative;
+                z-index: 100;
+                margin-right: 0.5rem;
+                padding: 10px;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .nav__burger.active span:nth-child(1) {
+                transform: translateY(6.5px) rotate(45deg);
+            }
+            .nav__burger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .nav__burger.active span:nth-child(3) {
+                transform: translateY(-6.5px) rotate(-45deg);
+            }
+
+            /* =========================================
+               2. AREA CARDS (Die drei Bilder untereinander)
+               ========================================= */
+            .areas {
+                grid-template-columns: 1fr; /* Zwingt die Karten in EINE Spalte untereinander */
+            }
+
+            .area-card {
+                aspect-ratio: 16/9; /* Macht die Bilder etwas flacher (Querformat) */
+            }
+
+            /* =========================================
+               3. RESTLICHES LAYOUT (Responsive Anpassungen)
+               ========================================= */
+            .about-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .composition-item {
+                grid-template-columns: auto 1fr;
+                gap: 1rem;
+            }
+
+            .comp-duration,
+            .comp-actions {
+                display: none;
+            }
+
+            .vita-entry {
+                grid-template-columns: 1fr;
+                gap: 0.25rem;
+            }
+
+            .about-facts {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
 
 
         @media (max-width: 600px) {

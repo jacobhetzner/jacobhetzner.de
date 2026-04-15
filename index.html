@@ -979,42 +979,99 @@
             .comp-duration,
             .comp-actions {
                 display: none;
+                
+        /* ═══════════════════════════════════════
+           RESPONSIVE - TABLET & MOBILE (900px)
+           ═══════════════════════════════════════ */
+        @media (max-width: 900px) {
+            
+            /* --- KORREKTUR 1: Burger-Menü sichtbar machen --- */
+            .nav {
+                padding: 0.8rem 1rem; /* Zieht die Ränder weiter nach innen */
+                width: 100%;
             }
 
-            .vita-entry {
-                grid-template-columns: 1fr;
-                gap: 0.25rem;
+            .nav__logo {
+                font-size: 1.1rem; /* Macht das Logo etwas kleiner, um Platz zu schaffen */
             }
 
-            .about-facts {
-                grid-template-columns: 1fr 1fr;
+            .nav__burger {
+                display: flex;
+                position: relative;
+                z-index: 100;
+                padding: 10px;
+                cursor: pointer;
+                flex-shrink: 0; /* Zwingt den Burger dazu, sich nicht verkleinern oder wegschieben zu lassen */
             }
-        }
+            /* ------------------------------------------------ */
 
-
-
-        @media (max-width: 600px) {
-            .hero__role:not(:last-child)::after {
-                display: none;
-            }
-
-            .hero__roles {
+            .nav__links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(15px);
+                display: flex;
                 flex-direction: column;
-                gap: 0.5rem;
+                justify-content: center;
+                align-items: center;
+                gap: 2.5rem;
+                transition: right 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+                z-index: 99;
             }
 
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .nav__links.active {
+                right: 0;
             }
 
-            .roles-table .venue {
-                display: none;
-            }
+            /* X-Animation */
+            .nav__burger.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+            .nav__burger.active span:nth-child(2) { opacity: 0; }
+            .nav__burger.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-            .about-facts {
-                grid-template-columns: 1fr;
+
+            /* --- KORREKTUR 2: Area Cards (Bilder) untereinander --- */
+            .areas { 
+                grid-template-columns: 1fr; /* '1fr' zwingt das Grid in genau 1 Spalte (untereinander) */
             }
+            
+            .area-card { 
+                aspect-ratio: 16/9; /* Sorgt dafür, dass die Bilder auf dem Handy nicht zu hoch werden */
+            }
+            /* ------------------------------------------------------ */
+
+
+            /* Weitere Anpassungen für das Smartphone */
+            .about-layout { grid-template-columns: 1fr; gap: 2rem; }
+            .video-grid { grid-template-columns: 1fr; }
+            .composition-item { grid-template-columns: auto 1fr; gap: 1rem; }
+            .comp-duration, .comp-actions { display: none; }
+            .vita-entry { grid-template-columns: 1fr; gap: 0.25rem; }
+            .about-facts { grid-template-columns: 1fr 1fr; }
         }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE - SMALL MOBILE (600px)
+           ═══════════════════════════════════════ */
+        @media (max-width: 600px) {
+            .nav {
+                padding: 0.6rem 0.8rem; /* Auf sehr kleinen Handys noch sparsamer mit dem Rand umgehen */
+            }
+
+            .nav__logo {
+                font-size: 1rem; /* Logo für winzige Bildschirme noch etwas verkleinern */
+                letter-spacing: 0.05em;
+            }
+
+            .hero__role:not(:last-child)::after { display: none; }
+            .hero__roles { flex-direction: column; gap: 0.5rem; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .roles-table .venue { display: none; }
+            .about-facts { grid-template-columns: 1fr; }
+        }
+
 
         /* ═══════════════════════════════════════
            ANIMATIONS — Scroll Reveal

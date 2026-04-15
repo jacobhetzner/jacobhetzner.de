@@ -1104,6 +1104,33 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* ═══════════════════════════════════════
+           BUGFIX: HORIZONTALES SCROLLEN VERHINDERN
+           ═══════════════════════════════════════ */
+        
+        /* 1. Ein strenges Limit für die gesamte Seite setzen */
+        html, body {
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        @media (max-width: 900px) {
+            /* 2. Die Tabelle seitlich wischbar machen */
+            .roles-table {
+                display: block;
+                width: 100%;
+                overflow-x: auto; /* Erlaubt das seitliche Scrollen NUR in der Tabelle */
+                -webkit-overflow-scrolling: touch; /* Macht das Wischen auf iPhones schön weich */
+                padding-bottom: 1rem; /* Ein bisschen Platz unten für den Scrollbalken */
+            }
+
+            /* Etwas mehr Abstand für die Tabellenzellen, damit es beim Wischen gut aussieht */
+            .roles-table td, .roles-table th {
+                padding-right: 1.5rem;
+            }
+        }
+         
     </style>
 </head>
 <body>

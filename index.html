@@ -733,7 +733,7 @@
             border-bottom: 1px solid var(--gray-800);
         }
 
-      /* Der Inhaltsbereich wird nun scrollbar */
+      /*Inhaltsbereich scrollbar */
         .text-modal__content-area {
             position: relative;
             padding: 2rem 2.5rem;
@@ -759,14 +759,23 @@
             border-radius: 3px;
         }
 
-        /* Das Verblassen sitzt nun am Ende des Textes */
+        /* Wir zwingen die neuen echten Absätze in den Blocksatz */
+        #modalBody p {
+            text-align: justify;
+            hyphens: auto;              /* Erlaubt automatische Silbentrennung */
+            margin-bottom: 1.5em;       /* Schöner, buchähnlicher Abstand zwischen Absätzen */
+        }
+
+        /* Der stärkere Verblassen-Effekt */
         .text-modal__fade {
-            height: 100px;
-            margin-top: -80px;         
+            height: 200px;              /* Größerer Bereich für den Effekt */
+            margin-top: -200px;         /* Zieht den Verlauf weiter nach oben über den Text */
             position: relative;
             pointer-events: none;
-            background: linear-gradient(to bottom, transparent, var(--gray-900));
+            /* HIER IST DER TRICK: Der Verlauf wird nun viel früher komplett blickdicht (bei 60%) */
+            background: linear-gradient(to bottom, rgba(26,26,26,0) 0%, var(--gray-900) 60%, var(--gray-900) 100%);
         }
+
 
 
         .text-modal__close {
@@ -1805,15 +1814,15 @@
                     if (!response.ok) throw new Error('Datei nicht gefunden');
                     return response.text();
                 })
+                
                 .then(data => {
-         // Zeilenumbrüche für HTML aufbereiten (zwei für echte Absätze)
-              modalBody.innerHTML = data.replace(/\n/g, '<br>');
-                })
-                .catch(err => {
-                    modalBody.innerHTML = 'Die Leseprobe konnte leider nicht geladen werden.';
-                    console.error(err);
-                });
-        };
+            // Das Geheimnis für den Blocksatz: Wir spalten den Text an jeder LEERZEILE auf...
+            const paragraphs = data.split(/\n\s*\n/);
+            
+            // ... und packen jedes Stückchen in einen echten Absatz-Tag (<p>)
+            modalBody.innerHTML = paragraphs.map(p => `<p>${p.trim()}</p>`).join('');
+        })
+
 
 
         window.closeTextModal = function() {

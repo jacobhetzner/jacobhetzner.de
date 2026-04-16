@@ -720,25 +720,31 @@
 
         .text-modal.active { display: flex; }
 
-        .text-modal__box {
+                .text-modal__box {
             background: var(--gray-900);
             border: 1px solid var(--gray-800);
-            width: 100%; max-width: 700px;
+            width: 100%; 
+            max-width: 700px;
             position: relative;
+            
+            /* NEU: Garantiert, dass die Box niemals aus dem Bildschirm rutscht */
+            max-height: 90vh; 
+            display: flex;
+            flex-direction: column;
         }
 
         .text-modal__title {
             font-family: var(--font-display); font-size: 1.8rem;
             color: var(--white); padding: 2rem;
             border-bottom: 1px solid var(--gray-800);
+            flex-shrink: 0; /* Verhindert, dass der Titel gequetscht wird */
         }
 
-      /*Inhaltsbereich scrollbar */
+        /* Inhaltsbereich scrollbar */
         .text-modal__content-area {
             position: relative;
             padding: 2rem 2.5rem;
-            max-height: 65vh;          
-            overflow-y: auto;          
+            overflow-y: auto; /* Erlaubt das Scrollen */
             color: var(--gray-300);
             line-height: 1.8;
             font-size: 1.05rem;
@@ -746,6 +752,7 @@
             text-align: justify;
             hyphens: auto;             
         }
+
 
         /* Schönerer Scrollbalken für den edlen Look */
         .text-modal__content-area::-webkit-scrollbar {
@@ -1533,7 +1540,7 @@
 
     <!-- ═══════════ SCHRIFTSTELLEREI ═══════════ -->
     
-    <section class="section section--dark" id="schriftsteller">
+    <section class="section" id="schriftsteller">
        <div class="container">
              <div class="section__header reveal">
                 <p class="section__label">Autor</p>
@@ -1826,7 +1833,7 @@
                     modalBody.innerHTML = '<p>Die Leseprobe konnte leider nicht geladen werden.</p>';
                     console.error(err);
                 });
-        }; // <--- DIESE WICHTIGE KLAMMER HAT GEFEHLT!
+        };
 
         window.closeTextModal = function() {
             document.getElementById('textModal').classList.remove('active');

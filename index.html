@@ -1793,7 +1793,7 @@
                 });
             });
             
-        // Leseprobe laden und Modal öffnen
+               // Leseprobe laden und Modal öffnen
         window.loadExternalText = function(filePath, title) {
             const modal = document.getElementById('textModal');
             const modalBody = document.getElementById('modalBody');
@@ -1803,7 +1803,7 @@
             modalTitle.innerText = title;
             modalBody.innerHTML = 'Lade Text...';
     
-        // Scrollposition beim Öffnen auf Null setzen
+            // Scrollposition beim Öffnen auf Null setzen
             if (contentArea) contentArea.scrollTop = 0;
 
             modal.classList.add('active');
@@ -1814,16 +1814,19 @@
                     if (!response.ok) throw new Error('Datei nicht gefunden');
                     return response.text();
                 })
-                
                 .then(data => {
-            // Das Geheimnis für den Blocksatz: Wir spalten den Text an jeder LEERZEILE auf...
-            const paragraphs = data.split(/\n\s*\n/);
-            
-            // ... und packen jedes Stückchen in einen echten Absatz-Tag (<p>)
-            modalBody.innerHTML = paragraphs.map(p => `<p>${p.trim()}</p>`).join('');
-        })
-
-
+                    // Das Geheimnis für den Blocksatz: Wir spalten den Text an jeder LEERZEILE auf...
+                    const paragraphs = data.split(/\n\s*\n/);
+                    
+                    // ... und packen jedes Stückchen in einen echten Absatz-Tag (<p>)
+                    modalBody.innerHTML = paragraphs.map(p => `<p>${p.trim()}</p>`).join('');
+                })
+                .catch(err => {
+                    // Falls die Datei nicht gefunden wird
+                    modalBody.innerHTML = '<p>Die Leseprobe konnte leider nicht geladen werden.</p>';
+                    console.error(err);
+                });
+        }; // <--- DIESE WICHTIGE KLAMMER HAT GEFEHLT!
 
         window.closeTextModal = function() {
             document.getElementById('textModal').classList.remove('active');
@@ -1834,6 +1837,7 @@
         document.getElementById('textModal').addEventListener('click', function(e) {
             if (e.target === this) closeTextModal();
         });
+
 
             
         })();

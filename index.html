@@ -733,19 +733,41 @@
             border-bottom: 1px solid var(--gray-800);
         }
 
+      /* Der Inhaltsbereich wird nun scrollbar */
         .text-modal__content-area {
-            position: relative; padding: 2.5rem;
-            max-height: 50vh; overflow: hidden;
-            color: var(--gray-300); line-height: 1.8;
+            position: relative;
+            padding: 2rem 2.5rem;
+            max-height: 65vh;          
+            overflow-y: auto;          
+            color: var(--gray-300);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            font-family: 'Georgia', serif;
+            text-align: justify;
+            hyphens: auto;             
         }
 
-        /* DER VERBLASSEN-EFFEKT */
-        .text-modal__fade {
-            position: absolute; bottom: 0; left: 0; right: 0;
-            height: 150px;
-            background: linear-gradient(to bottom, transparent, var(--gray-900));
-            pointer-events: none;
+        /* Schönerer Scrollbalken für den edlen Look */
+        .text-modal__content-area::-webkit-scrollbar {
+            width: 6px;
         }
+        .text-modal__content-area::-webkit-scrollbar-track {
+            background: var(--gray-900);
+        }
+        .text-modal__content-area::-webkit-scrollbar-thumb {
+            background: var(--gray-700);
+            border-radius: 3px;
+        }
+
+        /* Das Verblassen sitzt nun am Ende des Textes */
+        .text-modal__fade {
+            height: 100px;
+            margin-top: -80px;         
+            position: relative;
+            pointer-events: none;
+            background: linear-gradient(to bottom, transparent, var(--gray-900));
+        }
+
 
         .text-modal__close {
             position: absolute; top: 1rem; right: 1rem;
@@ -1767,9 +1789,14 @@
             const modal = document.getElementById('textModal');
             const modalBody = document.getElementById('modalBody');
             const modalTitle = document.getElementById('modalTitle');
+            const contentArea = document.querySelector('.text-modal__content-area');
 
             modalTitle.innerText = title;
             modalBody.innerHTML = 'Lade Text...';
+    
+        // Scrollposition beim Öffnen auf Null setzen
+            if (contentArea) contentArea.scrollTop = 0;
+
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
 
@@ -1779,14 +1806,15 @@
                     return response.text();
                 })
                 .then(data => {
-                    // Zeilenumbrüche in HTML umwandeln
-                    modalBody.innerHTML = data.replace(/\n/g, '<br>');
+         // Zeilenumbrüche für HTML aufbereiten (zwei für echte Absätze)
+              modalBody.innerHTML = data.replace(/\n/g, '<br>');
                 })
                 .catch(err => {
                     modalBody.innerHTML = 'Die Leseprobe konnte leider nicht geladen werden.';
                     console.error(err);
                 });
         };
+
 
         window.closeTextModal = function() {
             document.getElementById('textModal').classList.remove('active');

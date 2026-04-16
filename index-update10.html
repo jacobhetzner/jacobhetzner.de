@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Jacob Hetzner — Schauspieler · Sänger · Komponist</title>
+    <meta name="description" content="Jacob Hetzner — Schauspieler, Sänger und Komponist. Baritenor.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Raleway:ital,wght@0,200;0,300;0,400;1,200;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════
+           DESIGN TOKENS
+           ═══════════════════════════════════════ */
+        :root {
+            /* Farben */
+            --black: #0a0a0a;
+            --black-soft: #141414;
+            --gray-900: #1a1a1a;
+            --gray-800: #262626;
+            --gray-700: #333333;
+            --gray-600: #4a4a4a;
+            --gray-500: #666666;
+            --gray-400: #888888;
+            --gray-300: #aaaaaa;
+            --gray-200: #cccccc;
+            --gray-100: #e5e5e5;
+            --white: #f5f5f0;
+            --white-pure: #ffffff;
+
+            /* Ochsenblutrot — das Signature-Rot */
+            --oxblood: #6b1c23;
+            --oxblood-light: #8a2730;
+            --oxblood-dark: #4a1018;
+            --oxblood-glow: rgba(107, 28, 35, 0.3);
+
+            /* Typografie — Google Fonts (produktionsreif) */
+            --font-display: 'Cormorant Garamond', 'Georgia', serif;
+            --font-heading: 'Cinzel', 'Georgia', serif;
+            --font-body: 'Raleway', -apple-system, sans-serif;
+            --font-ui: 'Raleway', sans-serif;
+
+            /* Spacing */
+            --section-padding: clamp(4rem, 10vh, 8rem);
+            --container-max: 1200px;
+            --container-narrow: 800px;
+
+            /* Nav-Höhe als Variable — für Scroll-Offset nutzbar */
+            --nav-height: 72px;
+        }
+
+        /* ═══════════════════════════════════════
+           RESET & BASE
+           ═══════════════════════════════════════ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            /* Scroll-Offset für fixe Nav bei Anker-Sprüngen */
+            scroll-padding-top: var(--nav-height);
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--black);
+            color: var(--gray-200);
+            line-height: 1.7;
+            font-weight: 300;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Fixierter Ochsenblut-Glow — Parallax */
+        .glow-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse at 35% 45%, rgba(107, 28, 35, 0.4) 0%, transparent 55%),
+                radial-gradient(ellipse at 65% 70%, rgba(74, 16, 24, 0.25) 0%, transparent 45%),
+                radial-gradient(ellipse at 50% 20%, rgba(107, 28, 35, 0.15) 0%, transparent 40%),
+                var(--black);
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            color: var(--gray-200);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover,
+        a:focus-visible {
+            color: var(--oxblood-light);
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--oxblood-light);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        ::selection {
+            background: var(--oxblood);
+            color: var(--white);
+        }
+
+        /* Scroll-Anker-Offset für alle Sektionen mit id */
+        section[id] {
+            scroll-margin-top: var(--nav-height);
+        }
+
+        /* ═══════════════════════════════════════
+           NAVIGATION
+           ═══════════════════════════════════════ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+
+        .nav.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--gray-800);
+        }
+
+        .nav__logo {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--white);
+            letter-spacing: 0.08em;
+        }
+
+        .nav__links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav__links a {
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gray-300);
+            position: relative;
+        }
+
+        .nav__links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--oxblood);
+            transition: width 0.3s ease;
+        }
+
+        .nav__links a:hover,
+        .nav__links a:focus-visible {
+            color: var(--white);
+        }
+
+        @media (hover: hover) {
+            .nav__links a:hover::after {
+                width: 100%;
+            }
+        }
+
+        /* Mobile Burger — Touch-freundlicher Button */
+        .nav__burger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            padding: 10px;
+            min-width: 44px;
+            min-height: 44px;
+            /* Touch-Feedback unterdrücken */
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .nav__burger span {
+            width: 24px;
+            height: 1.5px;
+            background: var(--white);
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        /* ═══════════════════════════════════════
+           HERO
+           ═══════════════════════════════════════ */
+        .hero {
+            min-height: 100vh;
+            min-height: 100dvh; /* iOS Safari — dynamic viewport */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .hero__bg {
+            display: none;
+        }
+
+        .hero__content {
+            position: relative;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero__label {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            font-weight: 300;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--oxblood-light);
+            margin-bottom: 2rem;
+        }
+
+        .hero__name {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 300;
+            color: var(--white);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero__roles {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero__role {
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--gray-400);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .hero__role:not(:last-child)::after {
+            content: '\2726';
+            margin-left: 1.5rem;
+            font-size: 0.5rem;
+            vertical-align: middle;
+            color: var(--oxblood-light);
+        }
+
+        .hero__scroll {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray-500);
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero__scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--oxblood), transparent);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ═══════════════════════════════════════
+           SECTIONS — ALLGEMEIN
+           ═══════════════════════════════════════ */
+        .section {
+            position: relative;
+            z-index: 1;
+            padding: var(--section-padding) 2rem;
+        }
+
+        .section--dark {
+            background: rgba(20, 20, 20, 0.85);
+        }
+
+        .section--accent {
+            background: rgba(26, 26, 26, 0.85);
+        }
+
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+        }
+
+        .container--narrow {
+            max-width: var(--container-narrow);
+            margin: 0 auto;
+        }
+
+        .section__header {
+            margin-bottom: 4rem;
+        }
+
+        .section__label {
+            font-family: var(--font-ui);
+            font-size: 0.7rem;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--oxblood-light);
+            margin-bottom: 1rem;
+        }
+
+        .section__title {
+            font-family: var(--font-heading);
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 400;
+            color: var(--white);
+            line-height: 1.2;
+            letter-spacing: 0.03em;
+        }
+
+        .section__divider {
+            width: 60px;
+            height: 1px;
+            background: var(--oxblood);
+            margin-top: 1.5rem;
+        }
+
+        /* ═══════════════════════════════════════
+           DREI BEREICHE — CARDS
+           ═══════════════════════════════════════ */
+        .areas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+
+        .area-card {
+            position: relative;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .area-card__image {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.8s ease, filter 0.8s ease;
+            filter: grayscale(60%) brightness(0.5);
+        }
+
+        @media (hover: hover) {
+            .area-card:hover .area-card__image {
+                transform: scale(1.05);
+                filter: grayscale(20%) brightness(0.6);
+            }
+        }
+
+        .area-card__overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.9) 0%, transparent 60%);
+        }
+
+        .area-card__content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2.5rem;
+        }
+
+        .area-card__number {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            color: var(--oxblood-light);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .area-card__title {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 400;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+        }
+
+        .area-card__desc {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+            line-height: 1.6;
+            max-width: 280px;
+        }
+
+        .area-card__link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--oxblood-light);
+            transition: gap 0.3s ease;
+        }
+
+        @media (hover: hover) {
+            .area-card:hover .area-card__link {
+                gap: 1rem;
+            }
+        }
+
+        /* ═══════════════════════════════════════
+           SCHAUSPIEL — TABELLE
+           ═══════════════════════════════════════ */
+        .roles-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        .roles-table th {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            text-align: left;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--gray-800);
+            white-space: nowrap;
+        }
+
+        .roles-table td {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--gray-800);
+            font-size: 0.95rem;
+            vertical-align: top;
+        }
+
+        .roles-table tr:hover td {
+            color: var(--white);
+        }
+
+        .roles-table .role-name {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--white);
+        }
+
+        .roles-table .production {
+            font-style: italic;
+            color: var(--gray-300);
+        }
+
+        .roles-table .venue {
+            color: var(--gray-400);
+            font-size: 0.9rem;
+        }
+
+        .roles-table .year {
+            color: var(--oxblood-light);
+            font-family: var(--font-display);
+            white-space: nowrap;
+        }
+
+        /* Galerie Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
+            margin-top: 3rem;
+        }
+
+        .gallery-grid__item {
+            aspect-ratio: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-grid__item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(40%);
+            transition: all 0.5s ease;
+        }
+
+        @media (hover: hover) {
+            .gallery-grid__item:hover img {
+                filter: grayscale(0%);
+                transform: scale(1.05);
+            }
+        }
+
+        /* Platzhalter für Bilder */
+        .placeholder-img {
+            width: 100%;
+            height: 100%;
+            background: var(--gray-800);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-600);
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+
+        /* ═══════════════════════════════════════
+           GESANG — VIDEO EMBEDS
+           ═══════════════════════════════════════ */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .video-card {
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+            overflow: hidden;
+            transition: border-color 0.3s ease;
+        }
+
+        .video-card:hover,
+        .video-card:focus-within {
+            border-color: var(--oxblood);
+        }
+
+        .video-card__embed {
+            aspect-ratio: 16/9;
+            background: var(--gray-800);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-card__embed iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Lite YouTube Embed — Klick zum Laden */
+        .yt-lite {
+            position: relative;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .yt-lite img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+        @media (hover: hover) {
+            .yt-lite:hover img {
+                opacity: 0.7;
+            }
+        }
+        .yt-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: transform 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        @media (hover: hover) {
+            .yt-lite:hover .yt-play {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+        .yt-play svg {
+            filter: drop-shadow(0 2px 12px rgba(0,0,0,0.5));
+            display: block;
+        }
+
+        .video-card__info {
+            padding: 1.25rem;
+        }
+
+        .video-card__title {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            color: var(--white);
+            margin-bottom: 0.25rem;
+        }
+
+        .video-card__meta {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+        }
+
+        /* ═══════════════════════════════════════
+           KOMPOSITIONEN
+           ═══════════════════════════════════════ */
+        .comp-category {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            color: var(--white);
+            margin: 2rem 0 1rem;
+            font-weight: 400;
+        }
+
+        .comp-embed {
+            margin-bottom: 1rem;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .comp-embed iframe {
+            width: 100%;
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ═══════════════════════════════════════
+           ÜBER MICH
+           ═══════════════════════════════════════ */
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-image {
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-text h3 {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.25rem;
+            color: var(--gray-300);
+            font-size: 0.95rem;
+        }
+
+        .about-facts {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--gray-800);
+        }
+
+        .about-fact__label {
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            margin-bottom: 0.3rem;
+        }
+
+        .about-fact__value {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            color: var(--white);
+        }
+
+        /* ═══════════════════════════════════════
+           KONTAKT / CTA
+           ═══════════════════════════════════════ */
+        .contact-section {
+            text-align: center;
+            padding: var(--section-padding) 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 50% 100%, var(--oxblood-glow) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .contact__title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 300;
+            color: var(--white);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .contact__subtitle {
+            color: var(--gray-400);
+            margin-bottom: 3rem;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.9rem 2rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: 1px solid var(--gray-700);
+            transition: all 0.3s ease;
+            min-height: 44px;
+        }
+
+        .contact-link:hover,
+        .contact-link:focus-visible {
+            border-color: var(--oxblood);
+            color: var(--white);
+        }
+
+        .contact-link--primary {
+            background: var(--oxblood);
+            border-color: var(--oxblood);
+            color: var(--white);
+        }
+
+        .contact-link--primary:hover,
+        .contact-link--primary:focus-visible {
+            background: var(--oxblood-light);
+            border-color: var(--oxblood-light);
+            color: var(--white);
+        }
+
+        /* ═══════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════ */
+        .footer {
+            position: relative;
+            z-index: 1;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--gray-800);
+            background: rgba(10, 10, 10, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            font-size: 0.8rem;
+            color: var(--gray-500);
+        }
+
+        .footer__social {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer__social a {
+            color: var(--gray-500);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* ═══════════════════════════════════════
+           ANIMATIONS — Scroll Reveal
+           ═══════════════════════════════════════ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered children */
+        .stagger > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .stagger.visible > *:nth-child(1) { transition-delay: 0s; }
+        .stagger.visible > *:nth-child(2) { transition-delay: 0.1s; }
+        .stagger.visible > *:nth-child(3) { transition-delay: 0.2s; }
+        .stagger.visible > *:nth-child(4) { transition-delay: 0.3s; }
+        .stagger.visible > *:nth-child(5) { transition-delay: 0.35s; }
+
+        .stagger.visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE — TABLET & MOBILE (≤900px)
+           ═══════════════════════════════════════ */
+        @media (max-width: 900px) {
+            :root {
+                --nav-height: 60px;
+                --section-padding: clamp(3rem, 8vh, 5rem);
+            }
+
+            /* Navigation */
+            .nav {
+                padding: 0.9rem 1.25rem;
+            }
+
+            .nav.scrolled {
+                padding: 0.7rem 1.25rem;
+            }
+
+            .nav__logo {
+                font-size: 1.1rem;
+            }
+
+            .nav__burger {
+                display: flex;
+                position: relative;
+                z-index: 101;
+                flex-shrink: 0;
+            }
+
+            /* X-Animation wenn offen */
+            .nav__burger.active span:nth-child(1) {
+                transform: translateY(6.5px) rotate(45deg);
+            }
+            .nav__burger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .nav__burger.active span:nth-child(3) {
+                transform: translateY(-6.5px) rotate(-45deg);
+            }
+
+            /* Mobile Menu Overlay */
+            .nav__links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                height: 100dvh;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2.5rem;
+                transition: right 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+                z-index: 99;
+            }
+
+            .nav__links.active {
+                right: 0;
+            }
+
+            .nav__links a {
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
+            }
+
+            /* Sections */
+            .section {
+                padding: var(--section-padding) 1.25rem;
+            }
+
+            /* Area Cards untereinander */
+            .areas {
+                grid-template-columns: 1fr;
+            }
+
+            .area-card {
+                aspect-ratio: 16/9;
+            }
+
+            .area-card__content {
+                padding: 1.5rem;
+            }
+
+            .area-card__desc {
+                max-width: 100%;
+            }
+
+            /* Layout */
+            .about-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-facts {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.25rem;
+            }
+
+            .section__header {
+                margin-bottom: 2.5rem;
+            }
+
+            /* Tabelle: seitlich wischbar */
+            .roles-table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 0.5rem;
+            }
+
+            .roles-table td,
+            .roles-table th {
+                padding-right: 1.5rem;
+                white-space: nowrap;
+            }
+
+            /* Kontakt — Buttons volle Breite auf Mobile */
+            .contact-links {
+                flex-direction: column;
+                gap: 0.75rem;
+                max-width: 320px;
+                margin: 0 auto;
+            }
+
+            .contact-link {
+                width: 100%;
+            }
+
+            /* Footer stacken */
+            .footer {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+                padding: 2.5rem 1.25rem;
+            }
+
+            .footer__social {
+                justify-content: center;
+            }
+        }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE — SMALL MOBILE (≤600px)
+           ═══════════════════════════════════════ */
+        @media (max-width: 600px) {
+            .nav {
+                padding: 0.75rem 1rem;
+            }
+
+            .nav.scrolled {
+                padding: 0.6rem 1rem;
+            }
+
+            .nav__logo {
+                font-size: 1rem;
+                letter-spacing: 0.05em;
+            }
+
+            .hero__content {
+                padding: 1.5rem 1rem;
+            }
+
+            .hero__label {
+                letter-spacing: 0.3em;
+                font-size: 0.7rem;
+            }
+
+            .hero__role:not(:last-child)::after {
+                display: none;
+            }
+
+            .hero__roles {
+                flex-direction: column;
+                gap: 0.6rem;
+            }
+
+            .hero__scroll {
+                bottom: 2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3px;
+            }
+
+            .about-facts {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .comp-category {
+                font-size: 1.1rem;
+            }
+
+            .section__header {
+                margin-bottom: 2rem;
+            }
+        }
+
+        /* ═══════════════════════════════════════
+           ACCESSIBILITY — Reduced Motion
+           ═══════════════════════════════════════ */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .reveal,
+            .stagger > * {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fixierter Ochsenblut-Glow — Parallax -->
+    <div class="glow-bg"></div>
+
+    <!-- ═══════════ NAVIGATION ═══════════ -->
+    <nav class="nav" id="nav">
+        <a href="#" class="nav__logo">Jacob Hetzner</a>
+        <ul class="nav__links" id="nav-links">
+            <li><a href="#schauspiel">Schauspiel</a></li>
+            <li><a href="#gesang">Gesang</a></li>
+            <li><a href="#kompositionen">Kompositionen</a></li>
+            <li><a href="#ueber-mich">Über mich</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+        <button class="nav__burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="nav-links" type="button">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- ═══════════ HERO ═══════════ -->
+    <section class="hero" id="hero">
+        <div class="hero__bg"></div>
+        <div class="hero__content">
+            <p class="hero__label">Baritenor · Bühne · Musik</p>
+            <h1 class="hero__name">Jacob<br>Hetzner</h1>
+            <div class="hero__roles">
+                <span class="hero__role">Schauspieler</span>
+                <span class="hero__role">Sänger</span>
+                <span class="hero__role">Komponist</span>
+            </div>
+        </div>
+        <div class="hero__scroll" aria-hidden="true">
+            <span>Entdecken</span>
+            <div class="hero__scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ═══════════ DREI BEREICHE ═══════════ -->
+    <section class="section" style="padding: 0; z-index: 1;" aria-label="Bereiche">
+        <div class="areas stagger" id="areas-cards">
+            <!-- Schauspiel -->
+            <a href="#schauspiel" class="area-card">
+                <div class="area-card__image" style="background-image: url('01_schauspiel_deckkarte.jpg');"></div>
+                <div class="area-card__overlay"></div>
+                <div class="area-card__content">
+                    <span class="area-card__number">01</span>
+                    <h2 class="area-card__title">Schauspiel</h2>
+                    <p class="area-card__desc">Von Jesus Christ Superstar bis John Proctor. Rollen, die unter die Haut gehen.</p>
+                    <span class="area-card__link">Rollen ansehen →</span>
+                </div>
+            </a>
+
+            <!-- Gesang -->
+            <a href="#gesang" class="area-card">
+                <div class="area-card__image" style="background-image: url('02_gesang_deckkarte.jpg');"></div>
+                <div class="area-card__overlay"></div>
+                <div class="area-card__content">
+                    <span class="area-card__number">02</span>
+                    <h2 class="area-card__title">Gesang</h2>
+                    <p class="area-card__desc">Baritenor mit Tiefe. Live-Performances und Aufnahmen aus Musical und Konzert.</p>
+                    <span class="area-card__link">Videos ansehen →</span>
+                </div>
+            </a>
+
+            <!-- Kompositionen -->
+            <a href="#kompositionen" class="area-card">
+                <div class="area-card__image" style="background-image: url('03_komposition_deckkarte.jpg');"></div>
+                <div class="area-card__overlay"></div>
+                <div class="area-card__content">
+                    <span class="area-card__number">03</span>
+                    <h2 class="area-card__title">Kompositionen</h2>
+                    <p class="area-card__desc">Eigene Songs. Orchestrale Arrangements. Noten zum Anhören und Entdecken.</p>
+                    <span class="area-card__link">Musik entdecken →</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- ═══════════ SCHAUSPIEL ═══════════ -->
+    <section class="section section--dark" id="schauspiel">
+        <div class="container">
+            <div class="section__header reveal">
+                <p class="section__label">01 — Schauspiel</p>
+                <h2 class="section__title">Rollen & Produktionen</h2>
+                <div class="section__divider"></div>
+            </div>
+
+            <table class="roles-table reveal">
+                <thead>
+                    <tr>
+                        <th>Rolle</th>
+                        <th>Produktion</th>
+                        <th>Bühne</th>
+                        <th>Jahr</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="role-name">Narziss</td>
+                        <td class="production">Narziss und Goldmund</td>
+                        <td class="venue">Chinatournee</td>
+                        <td class="year">2026</td>
+                    </tr>
+                    <tr>
+                        <td class="role-name">Anthony</td>
+                        <td class="production">Sweeney Todd</td>
+                        <td class="venue">Mecklenburgisches Staatstheater Schwerin</td>
+                        <td class="year">2026</td>
+                    </tr>
+                    <tr>
+                        <td class="role-name">Bob Cratchit</td>
+                        <td class="production">Die Weihnachtsgeschichte</td>
+                        <td class="venue">Deutschlandtournee</td>
+                        <td class="year">2025</td>
+                    </tr>
+                    <tr>
+                        <td class="role-name">Rexy</td>
+                        <td class="production">Die Legende der Georgia McBride</td>
+                        <td class="venue">Theater Pforzheim</td>
+                        <td class="year">2025</td>
+                    </tr>
+                    <tr>
+                        <td class="role-name">Don John</td>
+                        <td class="production">Viel Lärm um Nichts</td>
+                        <td class="venue">Theater Pforzheim</td>
+                        <td class="year">2025</td>
+                    </tr>
+                    <tr>
+                        <td class="role-name">Tambourmajor</td>
+                        <td class="production">Woyzeck</td>
+                        <td class="venue">Theater Pforzheim</td>
+                        <td class="year">2024</td>
+                    </tr>
+                    <tr>
+                        <td class="role-name">Joachim (WalkIn)</td>
+                        <td class="production">Ku'Damm56</td>
+                        <td class="venue">Deutschlandtournee</td>
+                        <td class="year">2024</td>
+                    </tr>
+                    <tr>
+                        <td class="role-name">Jesus</td>
+                        <td class="production">Jesus Christ Superstar</td>
+                        <td class="venue">Musicalsommer Kufstein</td>
+                        <td class="year">2023</td>
+                    </tr>
+                    <tr>
+                        <td class="role-name">Der Lehrer</td>
+                        <td class="production">Jugend ohne Gott</td>
+                        <td class="venue">Theater Pforzheim</td>
+                        <td class="year">2023</td>
+                    </tr>
+                    <tr>
+                        <td class="role-name">Lord Savage</td>
+                        <td class="production">Jekyll &amp; Hyde</td>
+                        <td class="venue">Deutsches Theater München</td>
+                        <td class="year">2022</td>
+                    </tr>
+                    <tr>
+                        <td class="role-name">Volodja</td>
+                        <td class="production">Liebe Jelena Sergejewna</td>
+                        <td class="venue">Naturtheater Heidenheim</td>
+                        <td class="year">2016</td>
+                    </tr>
+                    <tr>
+                        <td class="role-name">John Proctor</td>
+                        <td class="production">Hexenjagd</td>
+                        <td class="venue">Naturtheater Heidenheim</td>
+                        <td class="year">2015</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Galerie -->
+            <div class="gallery-grid reveal" style="margin-top: 4rem;">
+                <div class="gallery-grid__item"><img src="buehnenfoto_1_jesus_jesus_christ_superstar.jpg" alt="Jacob als Jesus in Jesus Christ Superstar" loading="lazy"></div>
+                <div class="gallery-grid__item"><img src="buehnenfoto_2_volodja_liebe_jelena_sergejewna.jpg" alt="Jacob als Volodja in Liebe Jelena Sergejewna" loading="lazy"></div>
+                <div class="gallery-grid__item"><img src="buehnenfoto_3_rexy_die_legende_von_georgia_mcbride.jpg" alt="Jacob als Rexy in Die Legende von Georgia McBride" loading="lazy"></div>
+                <div class="gallery-grid__item"><img src="buehnenfoto_4__der_lehrer_jugend_ohne_gott.jpg" alt="Jacob als Der Lehrer in Jugend ohne Gott" loading="lazy"></div>
+                <div class="gallery-grid__item"><img src="buehnenfoto_5_don_john_viel_laerm_um_nichts.jpg" alt="Jacob als Don John in Viel Lärm um Nichts" loading="lazy"></div>
+                <div class="gallery-grid__item"><img src="buehnenfoto_6_john_proctor_hexejagd.jpg" alt="Jacob Hetzner als John in Hexenjagd" loading="lazy"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ GESANG ═══════════ -->
+    <section class="section" id="gesang">
+        <div class="container">
+            <div class="section__header reveal">
+                <p class="section__label">02 — Gesang</p>
+                <h2 class="section__title">Stimme & Performance</h2>
+                <div class="section__divider"></div>
+            </div>
+
+            <p class="reveal" style="color: var(--gray-400); max-width: 600px; margin-bottom: 2rem;">
+                Baritenor mit einer Stimme, die Grenzen verschiebt. Von der Titelrolle in Jesus Christ Superstar
+                bis zu eigenen Songs — hier findest du Live-Aufnahmen und Performances.
+            </p>
+
+            <!-- YouTube Video Grid — Lite Embed Pattern (Klick zum Laden) -->
+            <div class="video-grid reveal">
+                <div class="video-card">
+                    <div class="video-card__embed yt-lite" data-id="kl-XQuAuQ_U" data-title="Einsamkeit — Live Performance" role="button" tabindex="0" aria-label="Einsamkeit — Live Performance abspielen">
+                        <img src="https://i.ytimg.com/vi/kl-XQuAuQ_U/hqdefault.jpg" alt="" loading="lazy">
+                        <span class="yt-play" aria-hidden="true"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#8a2730"/><path d="M45 24 27 14v20" fill="#fff"/></svg></span>
+                    </div>
+                    <div class="video-card__info">
+                        <h3 class="video-card__title">Einsamkeit</h3>
+                        <p class="video-card__meta">Live Performance · Juni 2021</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-card__embed yt-lite" data-id="TfrWai3r5rw" data-title="Auditiontape-MashUp — Gesangs-Reel" role="button" tabindex="0" aria-label="Gesangs-Reel abspielen">
+                        <img src="https://i.ytimg.com/vi/TfrWai3r5rw/hqdefault.jpg" alt="" loading="lazy">
+                        <span class="yt-play" aria-hidden="true"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#8a2730"/><path d="M45 24 27 14v20" fill="#fff"/></svg></span>
+                    </div>
+                    <div class="video-card__info">
+                        <h3 class="video-card__title">Gesangs-Reel</h3>
+                        <p class="video-card__meta">Auditiontape-MashUp</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-card__embed yt-lite" data-id="HPsZ13VWsIY" data-title="Dieses Lied — Eigene Komposition" role="button" tabindex="0" aria-label="Dieses Lied abspielen">
+                        <img src="https://i.ytimg.com/vi/HPsZ13VWsIY/hqdefault.jpg" alt="" loading="lazy">
+                        <span class="yt-play" aria-hidden="true"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#8a2730"/><path d="M45 24 27 14v20" fill="#fff"/></svg></span>
+                    </div>
+                    <div class="video-card__info">
+                        <h3 class="video-card__title">Dieses Lied</h3>
+                        <p class="video-card__meta">Eigene Komposition</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ KOMPOSITIONEN ═══════════ -->
+    <section class="section section--accent" id="kompositionen">
+        <div class="container">
+            <div class="section__header reveal">
+                <p class="section__label">03 — Kompositionen</p>
+                <h2 class="section__title">Eigene Musik</h2>
+                <div class="section__divider"></div>
+            </div>
+
+            <p class="reveal" style="color: var(--gray-400); max-width: 600px; margin-bottom: 2rem;">
+                Orchestrale Arrangements. Außergewöhnliche Harmonien. Von Chanson bis Metal, von Filmmusik zu Musical. Hier kannst du reinhören!
+            </p>
+
+            <div class="reveal">
+                <!-- Kategorie: Meine Welt -->
+                <h3 class="comp-category">Meine Welt</h3>
+
+                <div class="comp-embed">
+                    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/jacob-hetzner/doch-heimlich-duersten-wir&color=%236b1c23&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy" title="Doch heimlich dürsten wir"></iframe>
+                </div>
+
+                <div class="comp-embed">
+                    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/jacob-hetzner/in-meine-welt-2&color=%236b1c23&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy" title="In meine Welt"></iframe>
+                </div>
+
+                <!-- Kategorie: Metal -->
+                <h3 class="comp-category">Metal</h3>
+
+                <div class="comp-embed">
+                    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/jacob-hetzner/king-of-democracy&color=%236b1c23&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy" title="King of Democracy"></iframe>
+                </div>
+
+                <div class="comp-embed">
+                    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/jacob-hetzner/virtue-for-sale&color=%236b1c23&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy" title="Virtue for Sale"></iframe>
+                </div>
+
+                <!-- Kategorie: Film- & Trailermusik -->
+                <h3 class="comp-category">Film- &amp; Trailermusik</h3>
+
+                <div class="comp-embed">
+                    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/jacob-hetzner/attacke-der-orks&color=%236b1c23&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy" title="Attacke der Orks"></iframe>
+                </div>
+
+                <div class="comp-embed">
+                    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/jacob-hetzner/healing&color=%236b1c23&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy" title="Healing"></iframe>
+                </div>
+
+                <!-- Kategorie: Fjeur — Das Steampunkmusical -->
+                <h3 class="comp-category">Fjeur — Das Steampunkmusical</h3>
+                <p style="color: var(--gray-400); font-size: 0.9rem; margin-bottom: 1rem;">Elendiges Schicksal — Video folgt</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ ÜBER MICH ═══════════ -->
+    <section class="section" id="ueber-mich">
+        <div class="container">
+            <div class="section__header reveal">
+                <p class="section__label">Über mich</p>
+                <h2 class="section__title">Der Mensch hinter der Kunst</h2>
+                <div class="section__divider"></div>
+            </div>
+
+            <div class="about-layout">
+                <div class="about-image reveal">
+                    <img src="portrait.jpg" alt="Jacob Hetzner — Portrait" loading="lazy">
+                </div>
+
+                <div class="about-text reveal">
+                    <h3>Schauspieler. Sänger. Komponist.</h3>
+
+                    <p>
+                        Hallo und herzlich willkommen! Ich bin Jacob. Wenn man mich fragt, was all diese verschiedenen Berufe miteinander verbindet, ist die Antwort eigentlich ganz simpel: Meine Leidenschaft ist es, Geschichten zu erzählen. Geschichten, die unter die Haut gehen, die von Brüchen leben und uns in unserer ganzen menschlichen Widersprüchlichkeit zeigen. Ob ich im Scheinwerferlicht auf der Bühne stehe, nachts an meinem Klavier sitze und nach den Harmonien für mein nächstes Lied suche, oder mich ins Schreiben eines neuen Theaterstücks vertiefe – im Kern geht es mir immer um die Suche nach der Wahrheit eines Charakters.
+                    </p>
+
+                    <p>
+                        Aufgewachsen in Dillingen an der Donau. Ausgebildet an der Bayerischen Theaterakademie August Everding in München. Heute auf der Bühne in Schwerin, morgen überall dort, wo Geschichten erzählt werden.
+                    </p>
+
+                    <p>
+                        Wo mein Herz am meisten aufblüht? Beim Schauspiel. Moralisch komplexe Figuren, die unter die Haut gehen. Als Bariton in Rollen, die sonst Tenöre singen. Und am Klavier, wo Songs entstehen, die wie ein Leben sind.
+                    </p>
+
+                    <p>
+                        Ich glaube fest daran, dass Theater – egal ob als reduziertes Sprechstück oder als opulentes Musical (die Adjektive könnte man hier natürlich auch gerne tauschen) – uns zwingt, genauer hinzusehen und uns selbst zu hinterfragen. Ich lade Dich herzlich ein, Dich hier auf meiner Seite umzusehen, in meine Welten einzutauchen und meine nächsten Stationen auf, bzw. vor der Bühne zu verfolgen.
+                    </p>
+
+                    <p>
+                        Schön, dass Du hier bist!
+                    </p>
+
+                    <div class="about-facts">
+                        <div>
+                            <p class="about-fact__label">Stimmlage</p>
+                            <p class="about-fact__value">Baritenor (G-c2/-a3 im Rockfalsett)</p>
+                        </div>
+                        <div>
+                            <p class="about-fact__label">Ausbildung</p>
+                            <p class="about-fact__value">M.A. Musical, Theaterakademie August Everding</p>
+                        </div>
+                        <div>
+                            <p class="about-fact__label">Aktuell</p>
+                            <p class="about-fact__value">Mecklenburgisches Staatstheater Schwerin</p>
+                        </div>
+                        <div>
+                            <p class="about-fact__label">Größe</p>
+                            <p class="about-fact__value">184 cm</p>
+                        </div>
+                        <div>
+                            <p class="about-fact__label">Jahrgang</p>
+                            <p class="about-fact__value">1994</p>
+                        </div>
+                        <div>
+                            <p class="about-fact__label">Instrumente</p>
+                            <p class="about-fact__value">Klavier, Altsaxophon, Saxaflute</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ KONTAKT / BOOKING ═══════════ -->
+    <section class="contact-section" id="kontakt">
+        <div class="container--narrow">
+            <h2 class="contact__title reveal">Zusammenarbeit</h2>
+            <p class="contact__subtitle reveal">
+                Für Anfragen erreichst du mich per E-Mail oder über Instagram.
+            </p>
+
+            <div class="contact-links reveal">
+                <a href="#" class="contact-link">
+                    CastForward
+                </a>
+                <a href="mailto:kontakt@jacobhetzner.de" class="contact-link contact-link--primary">
+                    E-Mail schreiben
+                </a>
+                <a href="https://www.instagram.com/jacobhetzner/" target="_blank" rel="noopener" class="contact-link">
+                    Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ FOOTER ═══════════ -->
+    <footer class="footer">
+        <span>&copy; 2026 Jacob Hetzner</span>
+        <div class="footer__social">
+            <a href="https://www.instagram.com/jacobhetzner/" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://soundcloud.com/jacob-hetzner" target="_blank" rel="noopener">SoundCloud</a>
+            <a href="#" rel="noopener">CastForward</a>
+            <a href="impressum.html">Impressum</a>
+        </div>
+    </footer>
+
+    <!-- ═══════════ JAVASCRIPT ═══════════ -->
+    <script>
+        (function () {
+            'use strict';
+
+            // ─── Navigation Scroll Effect ─────────
+            const nav = document.getElementById('nav');
+            const onScroll = () => {
+                nav.classList.toggle('scrolled', window.scrollY > 50);
+            };
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            // ─── Scroll Reveal ────────────────────
+            const revealElements = document.querySelectorAll('.reveal, .stagger');
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+                revealElements.forEach(el => observer.observe(el));
+            } else {
+                // Fallback — einfach alle sichtbar machen
+                revealElements.forEach(el => el.classList.add('visible'));
+            }
+
+            // ─── Mobile Menu Logik ────────────────
+            const burger = document.getElementById('burger');
+            const navLinks = document.getElementById('nav-links');
+            const navItems = navLinks.querySelectorAll('a');
+
+            const setMenuState = (open) => {
+                navLinks.classList.toggle('active', open);
+                burger.classList.toggle('active', open);
+                burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+                burger.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+                document.body.style.overflow = open ? 'hidden' : '';
+            };
+
+            burger.addEventListener('click', () => {
+                const isOpen = navLinks.classList.contains('active');
+                setMenuState(!isOpen);
+            });
+
+            // Menü mit Escape schließen
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                    setMenuState(false);
+                    burger.focus();
+                }
+            });
+
+            // Menü schließen & sanft scrollen
+            navItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    const href = item.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        e.preventDefault();
+                        setMenuState(false);
+                        const target = document.querySelector(href);
+                        if (target) {
+                            // Kurze Verzögerung, damit Menü-Schließ-Animation nicht scrollt
+                            setTimeout(() => {
+                                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }, 50);
+                        } else if (href === '#') {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                    }
+                });
+            });
+
+            // ─── YouTube Lite-Embed (Klick lädt Player) ─────────
+            const loadYouTube = (el) => {
+                const id = el.dataset.id;
+                const title = el.dataset.title || 'YouTube Video';
+                if (!id) return;
+
+                const iframe = document.createElement('iframe');
+                iframe.setAttribute('width', '100%');
+                iframe.setAttribute('height', '100%');
+                iframe.setAttribute('src', `https://www.youtube.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0`);
+                iframe.setAttribute('title', title);
+                iframe.setAttribute('frameborder', '0');
+                iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+                iframe.setAttribute('allowfullscreen', '');
+                el.innerHTML = '';
+                el.appendChild(iframe);
+            };
+
+            document.querySelectorAll('.yt-lite').forEach(el => {
+                el.addEventListener('click', () => loadYouTube(el));
+                // Tastatur-Support (Enter / Space)
+                el.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        loadYouTube(el);
+                    }
+                });
+            });
+        })();
+    </script>
+
+</body>
+</html>

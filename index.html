@@ -671,6 +671,93 @@
         }
 
         /* ═══════════════════════════════════════
+           AUTOR
+           ═══════════════════════════════════════ */
+        /* Grid für die Auswahlkarten */
+        .reading-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .reading-card {
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .reading-card:hover {
+            border-color: var(--oxblood);
+            transform: translateY(-5px);
+        }
+
+        .reading-card__title {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .reading-card__link {
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--oxblood-light);
+        }
+
+        /* Modal Styling */
+        .text-modal {
+            position: fixed; inset: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            z-index: 200; display: none; /* Wird per JS auf 'flex' gesetzt */
+            align-items: center; justify-content: center;
+            padding: 1rem;
+        }
+
+        .text-modal.active { display: flex; }
+
+        .text-modal__box {
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+            width: 100%; max-width: 700px;
+            position: relative;
+        }
+
+        .text-modal__title {
+            font-family: var(--font-display); font-size: 1.8rem;
+            color: var(--white); padding: 2rem;
+            border-bottom: 1px solid var(--gray-800);
+        }
+
+        .text-modal__content-area {
+            position: relative; padding: 2.5rem;
+            max-height: 50vh; overflow: hidden;
+            color: var(--gray-300); line-height: 1.8;
+        }
+
+        /* DER VERBLASSEN-EFFEKT */
+        .text-modal__fade {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            height: 150px;
+            background: linear-gradient(to bottom, transparent, var(--gray-900));
+            pointer-events: none;
+        }
+
+        .text-modal__close {
+            position: absolute; top: 1rem; right: 1rem;
+            background: transparent; border: none; color: var(--white);
+           font-size: 2rem; cursor: pointer;
+        }
+
+        .text-modal__footer { padding: 2rem; border-top: 1px solid var(--gray-800); text-align: center; }
+
+        
+
+        /* ═══════════════════════════════════════
            ÜBER MICH
            ═══════════════════════════════════════ */
         .about-layout {
@@ -1416,21 +1503,53 @@
     <!-- ═══════════ SCHRIFTSTELLEREI ═══════════ -->
     
     <section class="section section--dark" id="schriftsteller">
-        <div class="container">
-            <div class="section__header reveal">
+       <div class="container">
+             <div class="section__header reveal">
                 <p class="section__label">Autor</p>
                 <h2 class="section__title">Texte & Werke</h2>
                 <div class="section__divider"></div>
-            </div>
+        </div>
 
-        <p class="reveal" style="color: var(--gray-400); max-width: 600px; margin-bottom: 2rem;">
-            Meine Faszination für abgründige Charaktere und komplexe gesellschaftliche Themen lebe ich nicht nur im Rampenlicht aus, sondern auch als Autor von Prosa, Theaterstücken und Musicals.
-        </p>
-        
-           <div class="reveal">
-               <p>Inhalt folgt in Kürze...</p>
-           </div>
-       </div>
+        <h3 class="comp-category reveal">Lovecraft'sche Horrornovellen</h3>
+            <div class="reading-grid reveal">
+            <div class="reading-card" onclick="loadExternalText('leseproben/dunklerufe.txt', 'Dunkle Rufe')">
+                <h4 class="reading-card__title">Dunkle Rufe</h4>
+                <span class="reading-card__link">Leseprobe öffnen →</span>
+            </div>
+            <div class="reading-card" onclick="loadExternalText('leseproben/dasliedderdonacarmen.txt', 'Das Lied der Dona Carmen')">
+                <h4 class="reading-card__title">Das Lied der Dona Carmen</h4>
+                <span class="reading-card__link">Leseprobe öffnen →</span>
+            </div>
+        </div>
+
+        <h3 class="comp-category reveal" style="margin-top: 4rem;">Theater</h3>
+            <div class="reading-grid reveal">
+            <div class="reading-card" onclick="loadExternalText('leseproben/fjeur.txt', 'Fjeur — Das Steampunkmusical')">
+                <h4 class="reading-card__title">Fjeur (Libretto)</h4>
+                <span class="reading-card__link">In Kürze verfügbar →</span>
+            </div>
+            <div class="reading-card" onclick="loadExternalText('leseproben/metatron.txt', 'Metatron')">
+                <h4 class="reading-card__title">Metatron</h4>
+                <span class="reading-card__link">In Kürze verfügbar →</span>
+            </div>
+        </div>
+        </div>
+
+        <div class="text-modal" id="textModal">
+            <div class="text-modal__box">
+                <button class="text-modal__close" onclick="closeTextModal()">&times;</button>
+                <h3 class="text-modal__title" id="modalTitle">Titel</h3>
+                <div class="text-modal__content-area">
+                    <div id="modalBody">Lade Text...</div>
+                    <div class="text-modal__fade"></div> 
+                </div>
+                <div class="text-modal__footer">
+                    <p style="color: var(--gray-400); font-size: 0.9rem; margin-bottom: 1rem;">Mehr Informationen gerne per Mail</p>
+                    <a href="mailto:kontakt@jacobhetzner.de" class="contact-link contact-link--primary">Anfrage senden</a>
+                </div>
+            </div>
+        </div>
+
     </section>
 
 
@@ -1642,6 +1761,44 @@
                     }
                 });
             });
+            
+        // Leseprobe laden und Modal öffnen
+        window.loadExternalText = function(filePath, title) {
+            const modal = document.getElementById('textModal');
+            const modalBody = document.getElementById('modalBody');
+            const modalTitle = document.getElementById('modalTitle');
+
+            modalTitle.innerText = title;
+            modalBody.innerHTML = 'Lade Text...';
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) throw new Error('Datei nicht gefunden');
+                    return response.text();
+                })
+                .then(data => {
+                    // Zeilenumbrüche in HTML umwandeln
+                    modalBody.innerHTML = data.replace(/\n/g, '<br>');
+                })
+                .catch(err => {
+                    modalBody.innerHTML = 'Die Leseprobe konnte leider nicht geladen werden.';
+                    console.error(err);
+                });
+        };
+
+        window.closeTextModal = function() {
+            document.getElementById('textModal').classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        // Schließen bei Klick auf Hintergrund
+        document.getElementById('textModal').addEventListener('click', function(e) {
+            if (e.target === this) closeTextModal();
+        });
+
+            
         })();
     </script>
 

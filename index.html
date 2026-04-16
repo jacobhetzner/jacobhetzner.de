@@ -375,7 +375,7 @@
            ═══════════════════════════════════════ */
         .areas {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 2px;
         }
 
@@ -1109,6 +1109,7 @@
             <li><a href="#schauspiel">Schauspiel</a></li>
             <li><a href="#gesang">Gesang</a></li>
             <li><a href="#kompositionen">Kompositionen</a></li>
+            <li><a href="#schriftstellerei">Schrifstellerei</a></li>
             <li><a href="#ueber-mich">Über mich</a></li>
             <li><a href="#kontakt">Kontakt</a></li>
         </ul>
@@ -1127,6 +1128,8 @@
                 <span class="hero__role">Schauspieler</span>
                 <span class="hero__role">Sänger</span>
                 <span class="hero__role">Komponist</span>
+                <span class="hero__role">Autor</span>
+
             </div>
         </div>
         <div class="hero__scroll" aria-hidden="true">
@@ -1135,7 +1138,7 @@
         </div>
     </section>
 
-    <!-- ═══════════ DREI BEREICHE ═══════════ -->
+    <!-- ═══════════ VIER BEREICHE ═══════════ -->
     <section class="section" style="padding: 0; z-index: 1;" aria-label="Bereiche">
         <div class="areas stagger" id="areas-cards">
             <!-- Schauspiel -->
@@ -1173,6 +1176,18 @@
                     <span class="area-card__link">Musik entdecken →</span>
                 </div>
             </a>
+
+            <a href="#schriftsteller" class="area-card">
+                <div class="area-card__image" style="background-image: url('04_schriftsteller_deckkarte.jpg');"></div>
+                <div class="area-card__overlay"></div>
+                <div class="area-card__content">
+                    <span class="area-card__number">04</span>
+                    <h2 class="area-card__title">Schriftsteller</h2>
+                    <p class="area-card__desc">Theaterstücke, Kurzgeschichten und Lyrik. Worte, die Welten kreieren.</p>
+                    <span class="area-card__link">Texte entdecken →</span>
+                </div>
+            </a>
+
         </div>
     </section>
 
@@ -1184,6 +1199,11 @@
                 <h2 class="section__title">Rollen & Produktionen</h2>
                 <div class="section__divider"></div>
             </div>
+
+            <p class="reveal" style="color: var(--gray-400); max-width: 600px; margin-bottom: 2rem;">
+                Aktuelle Rollen und ein kleiner Auszug vergangener Produktionen
+            </p>
+
 
             <table class="roles-table reveal">
                 <thead>
@@ -1387,6 +1407,27 @@
             </div>
         </div>
     </section>
+
+    <!-- ═══════════ SCHRIFTSTELLEREI ═══════════ -->
+    
+    <section class="section section--dark" id="schriftsteller">
+        <div class="container">
+            <div class="section__header reveal">
+                <p class="section__label">Schriftstellerei</p>
+                <h2 class="section__title">Texte & Werke</h2>
+                <div class="section__divider"></div>
+            </div>
+
+        <p class="reveal" style="color: var(--gray-400); max-width: 600px; margin-bottom: 2rem;">
+            Meine Faszination für abgründige Charaktere und komplexe gesellschaftliche Themen lebe ich nicht nur im Rampenlicht aus, sondern auch als Autor von Prosa, Theaterstücken und Musicals.
+        </p>
+        
+           <div class="reveal">
+               <p>Inhalt folgt in Kürze...</p>
+           </div>
+       </div>
+    </section>
+
 
     <!-- ═══════════ ÜBER MICH ═══════════ -->
     <section class="section" id="ueber-mich">

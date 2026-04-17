@@ -1800,7 +1800,7 @@
                 });
             });
             
-               // Leseprobe laden und Modal öffnen
+                   // Leseprobe laden und Modal öffnen
         window.loadExternalText = function(filePath, title) {
             const modal = document.getElementById('textModal');
             const modalBody = document.getElementById('modalBody');
@@ -1815,6 +1815,9 @@
 
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+            
+            // NEU: Wir schummeln einen Eintrag in den Browser-Verlauf!
+            history.pushState({ modalOpen: true }, null, "");
 
             fetch(filePath)
                 .then(response => {
@@ -1829,21 +1832,33 @@
                     modalBody.innerHTML = paragraphs.map(p => `<p>${p.trim()}</p>`).join('');
                 })
                 .catch(err => {
-                    // Falls die Datei nicht gefunden wird
                     modalBody.innerHTML = '<p>Die Leseprobe konnte leider nicht geladen werden.</p>';
                     console.error(err);
                 });
         };
 
+        // NEU: Die angepasste Schließen-Funktion
         window.closeTextModal = function() {
-            document.getElementById('textModal').classList.remove('active');
-            document.body.style.overflow = '';
+            // Anstatt das Fenster direkt per Code zu schließen, sagen wir dem Browser: "Geh einen Schritt zurück".
+            // Das löst automatisch die "popstate" Funktion unten aus.
+            history.back();
         };
 
-        // Schließen bei Klick auf Hintergrund
+        // NEU: Der "Wächter" für die Zurück-Wischgeste des Handys
+        window.addEventListener('popstate', function(event) {
+            const modal = document.getElementById('textModal');
+            // Wenn der Nutzer zurück wischt UND das Modal offen ist -> Modal schließen
+            if (modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Schließen bei Klick auf den dunklen Hintergrund
         document.getElementById('textModal').addEventListener('click', function(e) {
             if (e.target === this) closeTextModal();
         });
+
 
 
             

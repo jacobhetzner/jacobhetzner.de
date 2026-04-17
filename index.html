@@ -713,7 +713,7 @@
             position: fixed; inset: 0;
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            z-index: 200; display: none; /* Wird per JS auf 'flex' gesetzt */
+            z-index: 9999; display: none; /* Wird per JS auf 'flex' gesetzt */
             align-items: center; justify-content: center;
             padding: 1rem;
         }
@@ -1573,21 +1573,6 @@
         </div>
         </div>
 
-        <div class="text-modal" id="textModal">
-            <div class="text-modal__box">
-                <button class="text-modal__close" onclick="closeTextModal()">&times;</button>
-                <h3 class="text-modal__title" id="modalTitle">Titel</h3>
-                <div class="text-modal__content-area">
-                    <div id="modalBody">Lade Text...</div>
-                    <div class="text-modal__fade"></div> 
-                </div>
-                <div class="text-modal__footer">
-                    <p style="color: var(--gray-400); font-size: 0.9rem; margin-bottom: 1rem;">Mehr Informationen gerne per Mail</p>
-                    <a href="mailto:kontakt@jacobhetzner.de" class="contact-link contact-link--primary">Anfrage senden</a>
-                </div>
-            </div>
-        </div>
-
     </section>
 
 
@@ -1691,6 +1676,21 @@
             <a href="impressum.html">Impressum</a>
         </div>
     </footer>
+
+      <div class="text-modal" id="textModal">
+            <div class="text-modal__box">
+                <button class="text-modal__close" onclick="closeTextModal()">&times;</button>
+                <h3 class="text-modal__title" id="modalTitle">Titel</h3>
+                <div class="text-modal__content-area">
+                    <div id="modalBody">Lade Text...</div>
+                    <div class="text-modal__fade"></div> 
+                </div>
+                <div class="text-modal__footer">
+                    <p style="color: var(--gray-400); font-size: 0.9rem; margin-bottom: 1rem;">Mehr Informationen gerne per Mail</p>
+                    <a href="mailto:kontakt@jacobhetzner.de" class="contact-link contact-link--primary">Anfrage senden</a>
+                </div>
+            </div>
+        </div>
 
     <!-- ═══════════ JAVASCRIPT ═══════════ -->
     <script>

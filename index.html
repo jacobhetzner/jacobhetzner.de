@@ -312,7 +312,7 @@
             0%, 100% { transform: translateX(-50%) translateY(0); }
             50% { transform: translateX(-50%) translateY(8px); }
         }
-
+        
         /* ═══════════════════════════════════════
            SECTIONS — ALLGEMEIN
            ═══════════════════════════════════════ */
@@ -1259,7 +1259,8 @@
             <div class="hero__scroll-line"></div>
         </div>
     </section>
-
+    
+    <main>
     <!-- ═══════════ VIER BEREICHE ═══════════ -->
     <section class="section" style="padding: 0; z-index: 1;" aria-label="Bereiche">
         <div class="areas stagger" id="areas-cards">
@@ -1653,7 +1654,7 @@
             </div>
         </div>
     </section>
-
+    </main>
     <!-- ═══════════ FOOTER ═══════════ -->
     <footer class="footer">
         <span>&copy; 2026 Jacob Hetzner</span>
@@ -1825,14 +1826,24 @@
                 });
         };
 
-        // NEU: Die angepasste Schließen-Funktion
+               // Sichere Schließen-Funktion
         window.closeTextModal = function() {
-            // Anstatt das Fenster direkt per Code zu schließen, sagen wir dem Browser: "Geh einen Schritt zurück".
-            // Das löst automatisch die "popstate" Funktion unten aus.
-            history.back();
+            const modal = document.getElementById('textModal');
+            
+            // 1. Modal optisch schließen
+            if (modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            
+            // 2. Nur im Verlauf zurückgehen, wenn wir den Eintrag auch selbst erzeugt haben
+            if (history.state && history.state.modalOpen) {
+                history.back();
+            }
         };
 
-        // NEU: Der "Wächter" für die Zurück-Wischgeste des Handys
+
+        // Der "Wächter" für die Zurück-Wischgeste des Handys
         window.addEventListener('popstate', function(event) {
             const modal = document.getElementById('textModal');
             // Wenn der Nutzer zurück wischt UND das Modal offen ist -> Modal schließen

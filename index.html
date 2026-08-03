@@ -663,6 +663,46 @@
             display: block;
         }
 
+        /* SOUNDCLOUD LITE-EMBED (Datenschutz) */
+        .sc-lite {
+            height: 166px;
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+
+        .sc-lite:hover,
+        .sc-lite:focus-visible {
+            border-color: var(--oxblood);
+            background: var(--black-soft);
+        }
+
+        .sc-lite svg {
+            fill: var(--oxblood-light);
+            transition: transform 0.3s ease;
+        }
+
+        .sc-lite:hover svg,
+        .sc-lite:focus-visible svg {
+            transform: scale(1.1);
+        }
+
+        .sc-lite p {
+            font-size: 0.8rem;
+            color: var(--gray-400);
+            margin-top: 0.75rem;
+            font-family: var(--font-ui);
+            letter-spacing: 0.05em;
+        }
+
+
         /* ═══════════════════════════════════════
            AUTOR
            ═══════════════════════════════════════ */
@@ -1486,13 +1526,14 @@
             </div>
 
             <div class="reveal">
-                <!-- Gethsemane via Soundcloud -->
-               <h3 class="comp-category">Gethsemane aus Jesus Christ Superstar / Recording 2023</h3>
+                <h3 class="comp-category">Gethsemane aus Jesus Christ Superstar / Recording 2023</h3>
 
-                    <div class="comp-embed">
-                        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/jacob-hetzner/gethsemane-jesus-christ&color=%236b1c23&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy" title="Gethsemane"></iframe>
+                    <div class="sc-lite" data-url="https%3A//soundcloud.com/jacob-hetzner/gethsemane-jesus-christ" data-title="Gethsemane" role="button" tabindex="0" aria-label="Track abspielen">
+                        <svg width="40" height="40" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <p>Track abspielen (SoundCloud laden)</p>
                     </div>
             </div>
+
             
         </div>
     </section>
@@ -1511,37 +1552,44 @@
             </p>
 
             <div class="reveal">
+                
                 <!-- Kategorie: Meine Welt -->
                 <h3 class="comp-category">Meine Welt</h3>
 
-                <div class="comp-embed">
-                    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/jacob-hetzner/doch-heimlich-duersten-wir&color=%236b1c23&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy" title="Doch heimlich dürsten wir"></iframe>
+                <div class="sc-lite" data-url="https%3A//soundcloud.com/jacob-hetzner/doch-heimlich-duersten-wir" data-title="Doch heimlich dürsten wir" role="button" tabindex="0">
+                    <svg width="40" height="40" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <p>Track abspielen (SoundCloud laden)</p>
                 </div>
 
-                <div class="comp-embed">
-                    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/jacob-hetzner/in-meine-welt-2&color=%236b1c23&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy" title="In meine Welt"></iframe>
+                <div class="sc-lite" data-url="https%3A//soundcloud.com/jacob-hetzner/in-meine-welt-2" data-title="In meine Welt" role="button" tabindex="0">
+                    <svg width="40" height="40" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <p>Track abspielen (SoundCloud laden)</p>
                 </div>
 
                 <!-- Kategorie: Metal -->
                 <h3 class="comp-category">Metal</h3>
 
-                <div class="comp-embed">
-                    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/jacob-hetzner/king-of-democracy&color=%236b1c23&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy" title="King of Democracy"></iframe>
+                <div class="sc-lite" data-url="https%3A//soundcloud.com/jacob-hetzner/king-of-democracy" data-title="King of Democracy" role="button" tabindex="0">
+                    <svg width="40" height="40" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <p>Track abspielen (SoundCloud laden)</p>
                 </div>
 
-                <div class="comp-embed">
-                    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/jacob-hetzner/virtue-for-sale&color=%236b1c23&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy" title="Virtue for Sale"></iframe>
+                <div class="sc-lite" data-url="https%3A//soundcloud.com/jacob-hetzner/virtue-for-sale" data-title="Virtue for Sale" role="button" tabindex="0">
+                    <svg width="40" height="40" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <p>Track abspielen (SoundCloud laden)</p>
                 </div>
 
                 <!-- Kategorie: Film- & Trailermusik -->
                 <h3 class="comp-category">Film- &amp; Trailermusik</h3>
 
-                <div class="comp-embed">
-                    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/jacob-hetzner/attacke-der-orks&color=%236b1c23&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy" title="Attacke der Orks"></iframe>
+                <div class="sc-lite" data-url="https%3A//soundcloud.com/jacob-hetzner/attacke-der-orks" data-title="Attacke der Orks" role="button" tabindex="0">
+                    <svg width="40" height="40" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <p>Track abspielen (SoundCloud laden)</p>
                 </div>
 
-                <div class="comp-embed">
-                    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/jacob-hetzner/healing&color=%236b1c23&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy" title="Healing"></iframe>
+                <div class="sc-lite" data-url="https%3A//soundcloud.com/jacob-hetzner/healing" data-title="Healing" role="button" tabindex="0">
+                    <svg width="40" height="40" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <p>Track abspielen (SoundCloud laden)</p>
                 </div>
 
             </div>
@@ -1810,6 +1858,40 @@
                     }
                 });
             });
+
+            // ─── SoundCloud Lite-Embed (Klick lädt Player) ─────────
+            const loadSoundCloud = (el) => {
+                const url = el.dataset.url;
+                const title = el.dataset.title || 'SoundCloud Track';
+                if (!url) return;
+
+                const iframe = document.createElement('iframe');
+                iframe.setAttribute('width', '100%');
+                iframe.setAttribute('height', '166');
+                iframe.setAttribute('scrolling', 'no');
+                iframe.setAttribute('frameborder', 'no');
+                iframe.setAttribute('allow', 'autoplay');
+                // WICHTIG: auto_play=true ist hier gesetzt, damit der Song nach dem Klick sofort startet!
+                iframe.setAttribute('src', `https://w.soundcloud.com/player/?url=${url}&color=%236b1c23&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false`);
+                iframe.setAttribute('title', title);
+                
+                el.innerHTML = '';
+                el.style.border = 'none'; // Rahmen entfernen, damit es nahtlos aussieht
+                el.style.background = 'transparent';
+                el.appendChild(iframe);
+            };
+
+            document.querySelectorAll('.sc-lite').forEach(el => {
+                el.addEventListener('click', () => loadSoundCloud(el));
+                // Tastatur-Support (Enter / Leertaste)
+                el.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        loadSoundCloud(el);
+                    }
+                });
+            });
+
             
                    // Leseprobe laden und Modal öffnen
         window.loadExternalText = function(filePath, title) {

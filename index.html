@@ -1297,11 +1297,11 @@
             }
         }
 
-        /* ═══════════════════════════════════════
-           BILDER-MODAL (Lightbox)
+          /* ═══════════════════════════════════════
+           BILDER-MODAL (Lightbox mit Zoom-Animation)
            ═══════════════════════════════════════ */
         .gallery-grid__item {
-            cursor: pointer; /* Zeigt den Klick-Finger an */
+            cursor: pointer;
         }
 
         .image-modal {
@@ -1311,26 +1311,38 @@
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             z-index: 10000;
-            display: none; /* Wird per JS auf flex gesetzt */
+            
+            /* Geändert für flüssige Animationen: Immer flex, aber unsichtbar */
+            display: flex; 
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 2rem;
+            
             opacity: 0;
-            transition: opacity 0.3s ease;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.3s ease, visibility 0.3s;
         }
 
         .image-modal.active {
-            display: flex;
             opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
         }
 
         .image-modal__img {
             max-width: 100%;
             max-height: 75vh;
             object-fit: contain;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
             border: 1px solid var(--gray-800);
+            
+            /* NEU: Startzustand der Animation (halb so groß und unsichtbar) */
+            transform: scale(0.5);
+            opacity: 0;
+            /* Ein eleganter, leicht abfedernder Zoom-Effekt */
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
         }
 
         .image-modal__caption {
@@ -1340,6 +1352,22 @@
             font-size: 1.4rem;
             text-align: center;
             max-width: 800px;
+            
+            /* NEU: Der Text rutscht leicht verzögert von unten nach oben */
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, opacity 0.4s ease 0.1s;
+        }
+
+        /* NEU: Der Endzustand, wenn das Modal geöffnet wird */
+        .image-modal.active .image-modal__img {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .image-modal.active .image-modal__caption {
+            transform: translateY(0);
+            opacity: 1;
         }
 
         .image-modal__close {
@@ -1359,6 +1387,7 @@
         .image-modal__close:hover {
             color: var(--oxblood-light);
         }
+
 
 
         /* ═══════════════════════════════════════

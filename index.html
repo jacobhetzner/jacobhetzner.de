@@ -663,44 +663,100 @@
             display: block;
         }
 
-        /* SOUNDCLOUD LITE-EMBED (Datenschutz) */
-        .sc-lite {
-            height: 166px;
+        /*  ═══════════════════════════════════════
+            SOUNDCLOUD FAKE-INTERFACE (Datenschutz)
+            ═══════════════════════════════════════ */
+        .sc-fake {
+            display: flex;
+            align-items: center;
             background: var(--gray-900);
             border: 1px solid var(--gray-800);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            height: 166px;
+            padding: 0 1.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
             margin-bottom: 1rem;
             width: 100%;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .sc-lite:hover,
-        .sc-lite:focus-visible {
+        .sc-fake:hover,
+        .sc-fake:focus-visible {
             border-color: var(--oxblood);
             background: var(--black-soft);
         }
 
-        .sc-lite svg {
-            fill: var(--oxblood-light);
-            transition: transform 0.3s ease;
+        /* Der runde Play-Button links */
+        .sc-fake__play {
+            width: 64px;
+            height: 64px;
+            background: var(--oxblood);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-right: 1.5rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        
+        .sc-fake__play svg {
+            fill: var(--white);
+            width: 24px;
+            height: 24px;
+            margin-left: 4px; /* Optische Mitte für das Play-Dreieck */
         }
 
-        .sc-lite:hover svg,
-        .sc-lite:focus-visible svg {
-            transform: scale(1.1);
+        .sc-fake:hover .sc-fake__play,
+        .sc-fake:focus-visible .sc-fake__play {
+            transform: scale(1.08);
+            background: var(--oxblood-light);
         }
 
-        .sc-lite p {
-            font-size: 0.8rem;
-            color: var(--gray-400);
-            margin-top: 0.75rem;
-            font-family: var(--font-ui);
-            letter-spacing: 0.05em;
+        /* Container für Titel und Waveform */
+        .sc-fake__info {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
         }
+
+        .sc-fake__title {
+            color: var(--white);
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            margin-bottom: 0.2rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .sc-fake__meta {
+            color: var(--gray-500);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Die simulierte Waveform als geniales SVG-Hintergrundbild */
+        .sc-fake__waveform {
+            height: 36px;
+            width: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg preserveAspectRatio='none' viewBox='0 0 200 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23666666'%3E%3Crect x='0' y='15' width='2' height='10' rx='1'/%3E%3Crect x='4' y='10' width='2' height='20' rx='1'/%3E%3Crect x='8' y='5' width='2' height='30' rx='1'/%3E%3Crect x='12' y='12' width='2' height='16' rx='1'/%3E%3Crect x='16' y='8' width='2' height='24' rx='1'/%3E%3Crect x='20' y='18' width='2' height='4' rx='1'/%3E%3Crect x='24' y='2' width='2' height='36' rx='1'/%3E%3Crect x='28' y='14' width='2' height='12' rx='1'/%3E%3Crect x='32' y='6' width='2' height='28' rx='1'/%3E%3Crect x='36' y='16' width='2' height='8' rx='1'/%3E%3Crect x='40' y='11' width='2' height='18' rx='1'/%3E%3Crect x='44' y='7' width='2' height='26' rx='1'/%3E%3Crect x='48' y='15' width='2' height='10' rx='1'/%3E%3Crect x='52' y='3' width='2' height='34' rx='1'/%3E%3Crect x='56' y='9' width='2' height='22' rx='1'/%3E%3Crect x='60' y='17' width='2' height='6' rx='1'/%3E%3Crect x='64' y='12' width='2' height='16' rx='1'/%3E%3Crect x='68' y='5' width='2' height='30' rx='1'/%3E%3Crect x='72' y='14' width='2' height='12' rx='1'/%3E%3Crect x='76' y='8' width='2' height='24' rx='1'/%3E%3Crect x='80' y='1' width='2' height='38' rx='1'/%3E%3Crect x='84' y='13' width='2' height='14' rx='1'/%3E%3Crect x='88' y='10' width='2' height='20' rx='1'/%3E%3Crect x='92' y='16' width='2' height='8' rx='1'/%3E%3Crect x='96' y='4' width='2' height='32' rx='1'/%3E%3Crect x='100' y='11' width='2' height='18' rx='1'/%3E%3Crect x='104' y='7' width='2' height='26' rx='1'/%3E%3Crect x='108' y='15' width='2' height='10' rx='1'/%3E%3Crect x='112' y='2' width='2' height='36' rx='1'/%3E%3Crect x='116' y='12' width='2' height='16' rx='1'/%3E%3Crect x='120' y='9' width='2' height='22' rx='1'/%3E%3Crect x='124' y='17' width='2' height='6' rx='1'/%3E%3Crect x='128' y='6' width='2' height='28' rx='1'/%3E%3Crect x='132' y='14' width='2' height='12' rx='1'/%3E%3Crect x='136' y='5' width='2' height='30' rx='1'/%3E%3Crect x='140' y='11' width='2' height='18' rx='1'/%3E%3Crect x='144' y='3' width='2' height='34' rx='1'/%3E%3Crect x='148' y='16' width='2' height='8' rx='1'/%3E%3Crect x='152' y='8' width='2' height='24' rx='1'/%3E%3Crect x='156' y='13' width='2' height='14' rx='1'/%3E%3Crect x='160' y='1' width='2' height='38' rx='1'/%3E%3Crect x='164' y='10' width='2' height='20' rx='1'/%3E%3Crect x='168' y='7' width='2' height='26' rx='1'/%3E%3Crect x='172' y='15' width='2' height='10' rx='1'/%3E%3Crect x='176' y='4' width='2' height='32' rx='1'/%3E%3Crect x='180' y='12' width='2' height='16' rx='1'/%3E%3Crect x='184' y='9' width='2' height='22' rx='1'/%3E%3Crect x='188' y='17' width='2' height='6' rx='1'/%3E%3Crect x='192' y='6' width='2' height='28' rx='1'/%3E%3Crect x='196' y='14' width='2' height='12' rx='1'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+
+        .sc-fake:hover .sc-fake__waveform,
+        .sc-fake:focus-visible .sc-fake__waveform {
+            opacity: 0.9;
+        }
+
 
 
         /* ═══════════════════════════════════════
@@ -1526,12 +1582,19 @@
             </div>
 
             <div class="reveal">
-                <h3 class="comp-category">Gethsemane aus Jesus Christ Superstar / Recording 2023</h3>
-
-                    <div class="sc-lite" data-url="https%3A//soundcloud.com/jacob-hetzner/gethsemane-jesus-christ" data-title="Gethsemane" role="button" tabindex="0" aria-label="Track abspielen">
-                        <svg width="40" height="40" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        <p>Track abspielen (SoundCloud laden)</p>
+               <h3 class="comp-category">Gethsemane aus Jesus Christ Superstar / Recording 2023</h3>
+               
+                <!-- Der neue Fake-Player -->
+                <div class="sc-fake" data-url="https%3A//soundcloud.com/jacob-hetzner/gethsemane-jesus-christ" data-title="Gethsemane" role="button" tabindex="0">
+                    <div class="sc-fake__play">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     </div>
+                    <div class="sc-fake__info">
+                        <div class="sc-fake__title">Gethsemane</div>
+                        <div class="sc-fake__meta">Mit Klick auf Play über SoundCloud laden</div>
+                        <div class="sc-fake__waveform"></div>
+                    </div>
+                </div>
             </div>
 
             
@@ -1556,41 +1619,78 @@
                 <!-- Kategorie: Meine Welt -->
                 <h3 class="comp-category">Meine Welt</h3>
 
-                <div class="sc-lite" data-url="https%3A//soundcloud.com/jacob-hetzner/doch-heimlich-duersten-wir" data-title="Doch heimlich dürsten wir" role="button" tabindex="0">
-                    <svg width="40" height="40" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    <p>Track abspielen (SoundCloud laden)</p>
+                <div class="sc-fake" data-url="https%3A//soundcloud.com/jacob-hetzner/doch-heimlich-duersten-wir" data-title="Doch heimlich dürsten wir" role="button" tabindex="0">
+                    <div class="sc-fake__play">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <div class="sc-fake__info">
+                        <div class="sc-fake__title">Doch heimlich dürsten wir</div>
+                        <div class="sc-fake__meta">Mit Klick auf Play über SoundCloud laden</div>
+                        <div class="sc-fake__waveform"></div>
+                    </div>
                 </div>
 
-                <div class="sc-lite" data-url="https%3A//soundcloud.com/jacob-hetzner/in-meine-welt-2" data-title="In meine Welt" role="button" tabindex="0">
-                    <svg width="40" height="40" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    <p>Track abspielen (SoundCloud laden)</p>
+                <div class="sc-fake" data-url="https%3A//soundcloud.com/jacob-hetzner/in-meine-welt-2" data-title="In meine Welt" role="button" tabindex="0">
+                    <div class="sc-fake__play">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <div class="sc-fake__info">
+                        <div class="sc-fake__title">In meine Welt</div>
+                        <div class="sc-fake__meta">Mit Klick auf Play über SoundCloud laden</div>
+                        <div class="sc-fake__waveform"></div>
+                    </div>
                 </div>
 
                 <!-- Kategorie: Metal -->
                 <h3 class="comp-category">Metal</h3>
 
-                <div class="sc-lite" data-url="https%3A//soundcloud.com/jacob-hetzner/king-of-democracy" data-title="King of Democracy" role="button" tabindex="0">
-                    <svg width="40" height="40" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    <p>Track abspielen (SoundCloud laden)</p>
+                <div class="sc-fake" data-url="https%3A//soundcloud.com/jacob-hetzner/king-of-democracy" data-title="King of Democracy" role="button" tabindex="0">
+                    <div class="sc-fake__play">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <div class="sc-fake__info">
+                        <div class="sc-fake__title">King of Democracy</div>
+                        <div class="sc-fake__meta">Mit Klick auf Play über SoundCloud laden</div>
+                        <div class="sc-fake__waveform"></div>
+                    </div>
                 </div>
 
-                <div class="sc-lite" data-url="https%3A//soundcloud.com/jacob-hetzner/virtue-for-sale" data-title="Virtue for Sale" role="button" tabindex="0">
-                    <svg width="40" height="40" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    <p>Track abspielen (SoundCloud laden)</p>
+                <div class="sc-fake" data-url="https%3A//soundcloud.com/jacob-hetzner/virtue-for-sale" data-title="Virtue for Sale" role="button" tabindex="0">
+                    <div class="sc-fake__play">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <div class="sc-fake__info">
+                        <div class="sc-fake__title">Virtue for Sale</div>
+                        <div class="sc-fake__meta">Mit Klick auf Play über SoundCloud laden</div>
+                        <div class="sc-fake__waveform"></div>
+                    </div>
                 </div>
 
                 <!-- Kategorie: Film- & Trailermusik -->
                 <h3 class="comp-category">Film- &amp; Trailermusik</h3>
 
-                <div class="sc-lite" data-url="https%3A//soundcloud.com/jacob-hetzner/attacke-der-orks" data-title="Attacke der Orks" role="button" tabindex="0">
-                    <svg width="40" height="40" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    <p>Track abspielen (SoundCloud laden)</p>
+                <div class="sc-fake" data-url="https%3A//soundcloud.com/jacob-hetzner/attacke-der-orks" data-title="Attacke der Orks" role="button" tabindex="0">
+                    <div class="sc-fake__play">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <div class="sc-fake__info">
+                        <div class="sc-fake__title">Attacke der Orks</div>
+                        <div class="sc-fake__meta">Mit Klick auf Play über SoundCloud laden</div>
+                        <div class="sc-fake__waveform"></div>
+                    </div>
                 </div>
 
-                <div class="sc-lite" data-url="https%3A//soundcloud.com/jacob-hetzner/healing" data-title="Healing" role="button" tabindex="0">
-                    <svg width="40" height="40" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    <p>Track abspielen (SoundCloud laden)</p>
+                <div class="sc-fake" data-url="https%3A//soundcloud.com/jacob-hetzner/healing" data-title="Healing" role="button" tabindex="0">
+                    <div class="sc-fake__play">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <div class="sc-fake__info">
+                        <div class="sc-fake__title">Healing</div>
+                        <div class="sc-fake__meta">Mit Klick auf Play über SoundCloud laden</div>
+                        <div class="sc-fake__waveform"></div>
+                    </div>
                 </div>
+
 
             </div>
         </div>
@@ -1859,7 +1959,7 @@
                 });
             });
 
-            // ─── SoundCloud Lite-Embed (Klick lädt Player) ─────────
+            // ─── SoundCloud Fake-Interface (Klick lädt Player) ─────────
             const loadSoundCloud = (el) => {
                 const url = el.dataset.url;
                 const title = el.dataset.title || 'SoundCloud Track';
@@ -1871,19 +1971,19 @@
                 iframe.setAttribute('scrolling', 'no');
                 iframe.setAttribute('frameborder', 'no');
                 iframe.setAttribute('allow', 'autoplay');
-                // WICHTIG: auto_play=true ist hier gesetzt, damit der Song nach dem Klick sofort startet!
+                // auto_play=true lässt den Song sofort starten!
                 iframe.setAttribute('src', `https://w.soundcloud.com/player/?url=${url}&color=%236b1c23&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false`);
                 iframe.setAttribute('title', title);
                 
                 el.innerHTML = '';
-                el.style.border = 'none'; // Rahmen entfernen, damit es nahtlos aussieht
+                el.style.border = 'none';
                 el.style.background = 'transparent';
+                el.style.padding = '0';
                 el.appendChild(iframe);
             };
 
-            document.querySelectorAll('.sc-lite').forEach(el => {
+            document.querySelectorAll('.sc-fake').forEach(el => {
                 el.addEventListener('click', () => loadSoundCloud(el));
-                // Tastatur-Support (Enter / Leertaste)
                 el.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault();
@@ -1893,7 +1993,7 @@
             });
 
             
-                   // Leseprobe laden und Modal öffnen
+        // Leseprobe laden und Modal öffnen
         window.loadExternalText = function(filePath, title) {
             const modal = document.getElementById('textModal');
             const modalBody = document.getElementById('modalBody');

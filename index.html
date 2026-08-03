@@ -1298,6 +1298,70 @@
         }
 
         /* ═══════════════════════════════════════
+           BILDER-MODAL (Lightbox)
+           ═══════════════════════════════════════ */
+        .gallery-grid__item {
+            cursor: pointer; /* Zeigt den Klick-Finger an */
+        }
+
+        .image-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 10000;
+            display: none; /* Wird per JS auf flex gesetzt */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .image-modal__img {
+            max-width: 100%;
+            max-height: 75vh;
+            object-fit: contain;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            border: 1px solid var(--gray-800);
+        }
+
+        .image-modal__caption {
+            margin-top: 1.5rem;
+            color: var(--white);
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .image-modal__close {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            background: transparent;
+            border: none;
+            color: var(--white);
+            font-size: 3rem;
+            cursor: pointer;
+            z-index: 2;
+            transition: color 0.3s ease;
+            line-height: 1;
+        }
+
+        .image-modal__close:hover {
+            color: var(--oxblood-light);
+        }
+
+
+        /* ═══════════════════════════════════════
            ACCESSIBILITY — Reduced Motion
            ═══════════════════════════════════════ */
         @media (prefers-reduced-motion: reduce) {
@@ -1519,6 +1583,14 @@
                 <div class="gallery-grid__item"><img src="buehnenfoto_6_john_proctor_hexejagd.jpg" alt="Jacob als John Proctor in Hexenjagd" loading="lazy"></div>
             </div>
         </div>
+
+        <!-- Bilder-Modal (Lightbox) -->
+        <div class="image-modal" id="imageModal">
+            <button class="image-modal__close" onclick="closeImageModal()">&times;</button>
+            <img class="image-modal__img" id="modalImage" src="" alt="">
+            <div class="image-modal__caption" id="modalCaption">Titel des Bildes</div>
+        </div>
+
     </section>
 
     <!-- ═══════════ GESANG ═══════════ -->
@@ -2012,7 +2084,7 @@
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
             
-            // NEU: Wir schummeln einen Eintrag in den Browser-Verlauf!
+            // Eintrag in den Browser-Verlauf schummeln
             history.pushState({ modalOpen: true }, null, "");
 
             fetch(filePath)
@@ -2049,16 +2121,63 @@
             }
         };
 
+        // ─── Bilder-Lightbox (Modal) ─────────
+        const imageModal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const modalCaption = document.getElementById('modalCaption');
+        const galleryItems = document.querySelectorAll('.gallery-grid__item img');
 
-        // Der "Wächter" für die Zurück-Wischgeste des Handys
+        window.openImageModal = function(src, alt) {
+            modalImg.src = src;
+            modalCaption.innerText = alt; // Hier wird dein "Jacob als..." Text ausgelesen!
+            
+            imageModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Verknüpfung mit dem Zurück-Button des Handys
+            history.pushState({ imageModalOpen: true }, null, "");
+        };
+
+        window.closeImageModal = function() {
+            if (imageModal.classList.contains('active')) {
+                imageModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            if (history.state && history.state.imageModalOpen) {
+                history.back();
+            }
+        };
+
+        // Klick-Events an alle Bilder der Galerie hängen
+        galleryItems.forEach(img => {
+            img.addEventListener('click', () => {
+                openImageModal(img.src, img.alt);
+            });
+        });
+
+        // Schließen bei Klick auf den dunklen Hintergrund
+        imageModal.addEventListener('click', (e) => {
+            if (e.target === imageModal) {
+                closeImageModal();
+            }
+        });
+
+
+        // Der "Wächter" für die Zurück-Wischgeste des Handys (Für Text & Bilder)
         window.addEventListener('popstate', function(event) {
-            const modal = document.getElementById('textModal');
-            // Wenn der Nutzer zurück wischt UND das Modal offen ist -> Modal schließen
-            if (modal.classList.contains('active')) {
-                modal.classList.remove('active');
+            const textModal = document.getElementById('textModal');
+            const imageModal = document.getElementById('imageModal');
+            
+            if (textModal.classList.contains('active')) {
+                textModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            if (imageModal.classList.contains('active')) {
+                imageModal.classList.remove('active');
                 document.body.style.overflow = '';
             }
         });
+
 
         // Schließen bei Klick auf den dunklen Hintergrund
         document.getElementById('textModal').addEventListener('click', function(e) {
